@@ -328,7 +328,10 @@ function resetReaction() {
 async function boot() {
   renderSubstanceOptions();
   renderSelectedReagents();
-  const response = await fetch("/api/reactions");
+  const response = await fetch("/reactions.json");
+  if (!response.ok) {
+    throw new Error("Не могат да се заредят реакциите.");
+  }
   state.reactions = await response.json();
   selectReaction(state.reactions[0].id);
 }
