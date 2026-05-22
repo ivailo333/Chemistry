@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+tmp/
+server.out.log
+server.err.log
+.DS_Store

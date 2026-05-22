@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Химична лаборатория</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Начало">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="img">
+              <path d="M18 6h12M21 6v12L10 37a7 7 0 0 0 6 5h16a7 7 0 0 0 6-5L27 18V6" />
+              <path d="M16 32h16" />
+            </svg>
+          </span>
+          <span>
+            <strong>Химична лаборатория</strong>
+            <small>симулатор на реакции</small>
+          </span>
+        </a>
+        <div class="top-actions">
+          <button class="ghost-button" id="showConcept" type="button">Концепция</button>
+          <button class="primary-button" id="randomReaction" type="button">Случаен опит</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="reaction-panel" aria-label="Списък с реакции">
+          <div class="panel-heading">
+            <h1>Избери реакция</h1>
+            <p>Използвай готов пример или състави собствен опит от вещества.</p>
+          </div>
+          <div class="reaction-list" id="reactionList"></div>
+
+          <section class="custom-builder" aria-label="Добави изходни вещества">
+            <h2>Състави свой опит</h2>
+            <label for="substanceSelect">Изходно вещество</label>
+            <div class="builder-row">
+              <select id="substanceSelect"></select>
+              <button class="secondary-button compact-button" id="addSubstance" type="button">Добави</button>
+            </div>
+            <div class="selected-reagents" id="selectedReagents"></div>
+            <p class="builder-status" id="builderStatus"></p>
+            <div class="builder-actions">
+              <button class="primary-button compact-button" id="mixCustom" type="button">Смеси</button>
+              <button class="ghost-button compact-button" id="clearCustom" type="button">Изчисти</button>
+            </div>
+          </section>
+        </aside>
+
+        <section class="lab-stage" aria-label="Виртуална лаборатория">
+          <div class="lab-backdrop" aria-hidden="true">
+            <div class="shelf shelf-one"></div>
+            <div class="shelf shelf-two"></div>
+            <div class="flask flask-a"></div>
+            <div class="flask flask-b"></div>
+          </div>
+
+          <div class="stage-header">
+            <div>
+              <p class="micro-label">Текущ опит</p>
+              <h2 id="reactionTitle">Зареждане...</h2>
+            </div>
+            <div class="meter" aria-label="Ниво на трудност">
+              <span>Трудност</span>
+              <div id="difficultyDots" class="difficulty-dots"></div>
+            </div>
+          </div>
+
+          <div class="bench">
+            <div class="tube-group">
+              <p class="section-label">Реагенти</p>
+              <div class="tube-row" id="reagentTubes"></div>
+            </div>
+
+            <div class="mixing-zone">
+              <div class="reaction-vessel" id="reactionVessel">
+                <div class="liquid mix-liquid" id="mixLiquid"></div>
+                <div class="particle-field" id="particleField"></div>
+                <div class="glass-shine"></div>
+              </div>
+              <div class="burner">
+                <span></span>
+              </div>
+              <div class="control-row">
+                <button class="primary-button" id="startReaction" type="button">Старт</button>
+                <button class="secondary-button" id="resetReaction" type="button">Нулирай</button>
+              </div>
+            </div>
+
+            <div class="tube-group">
+              <p class="section-label">Продукти</p>
+              <div class="tube-row" id="productTubes"></div>
+            </div>
+          </div>
+
+          <div class="timeline" aria-label="Етапи на реакцията">
+            <button class="step active" data-step="0" type="button">1. Подготовка</button>
+            <button class="step" data-step="1" type="button">2. Смесване</button>
+            <button class="step" data-step="2" type="button">3. Наблюдение</button>
+          </div>
+        </section>
+
+        <aside class="info-panel" aria-label="Наблюдения и уравнение">
+          <section class="info-block">
+            <p class="micro-label">Наблюдение</p>
+            <p id="observation">Избери реакция, за да започнеш.</p>
+          </section>
+          <section class="info-block equation-block">
+            <p class="micro-label">Уравнение</p>
+            <code id="equation">...</code>
+          </section>
+          <section class="info-block">
+            <p class="micro-label">Какво става?</p>
+            <p id="explanation">Ще видиш кои частици се свързват, отделят газ или образуват утайка.</p>
+          </section>
+          <section class="info-block safety">
+            <p class="micro-label">Безопасност</p>
+            <p id="safety">В лабораторията винаги се работи внимателно.</p>
+          </section>
+          <section class="quiz-card">
+            <p class="micro-label">Мини въпрос</p>
+            <h3 id="quizQuestion">...</h3>
+            <div id="quizAnswers" class="quiz-answers"></div>
+            <p id="quizResult" class="quiz-result" aria-live="polite"></p>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <dialog id="conceptDialog" class="concept-dialog">
+      <form method="dialog">
+        <button class="icon-button" aria-label="Затвори">x</button>
+      </form>
+      <img src="/assets/lab-ui-concept.png" alt="Визуална концепция на интерфейса">
+    </dialog>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
